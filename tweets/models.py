@@ -9,7 +9,7 @@ class Tweet(CommonModel):
     user = models.ForeignKey(
         "users.User",
         on_delete=models.CASCADE,
-        # related_name="tweets",
+        related_name="tweets",
     )
 
     def __str__(self):
@@ -24,7 +24,7 @@ class Like(CommonModel):
     user = models.ForeignKey(
         "users.User",
         on_delete=models.CASCADE,
-        # related_name="likes",
+        related_name="likes",
     )
     tweets = models.ForeignKey(
         "tweets.Tweet",
