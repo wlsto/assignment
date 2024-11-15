@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
 from rest_framework.views import APIView
-from rest_framework.status import HTTP_204_NO_CONTENT
+from rest_framework.status import HTTP_204_NO_CONTENT, HTTP_400_BAD_REQUEST
 
 
 # Create your views here.
@@ -28,7 +28,10 @@ class TweetView(APIView):
                 TweetSerializer(tweet).data,
             )
         else:
-            return Response(serializer.errors)
+            return Response(
+                serializer.errors,
+                status=HTTP_400_BAD_REQUEST,
+            )
 
 
 class TweetDetailView(APIView):
@@ -59,7 +62,10 @@ class TweetDetailView(APIView):
                 TweetSerializer(updated_tweet).data,
             )
         else:
-            return Response(serializer.errors)
+            return Response(
+                serializer.errors,
+                status=HTTP_400_BAD_REQUEST,
+            )
 
     # DELETE /api/v1/tweets/<int:pk>
     def delete(self, reqeust, pk):
